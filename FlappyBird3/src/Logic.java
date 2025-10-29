@@ -88,9 +88,41 @@ public class Logic implements ActionListener, KeyListener {
         }
     }
 
+    public boolean checkCollision(Player player, Pipe pipe) {
+        Rectangle playerRect = new Rectangle(player.getPosX(), player.getPosY(),
+                player.getWidth(), player.getHeight());
+        Rectangle pipeRect = new Rectangle(pipe.getPosX(), pipe.getPosY(),
+                pipe.getWidth(), pipe.getHeight());
+
+        return playerRect.intersects(pipeRect);
+    }
+
+    public void gameOver() {
+        System.out.println("GAME OVER");
+        gameloop.stop();
+        pipesCooldown.stop();
+
+        JOptionPane.showMessageDialog(null, "GAME OVER!");
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         move();
+
+        // 🔥 Cek tabrakan sama pipa
+        for (Pipe pipe : pipes) {
+            if (checkCollision(player, pipe)) {
+                gameOver();
+                return;
+            }
+        }
+
+        // 🔥 Cek kalau jatuh ke bawah frame
+        if (player.getPosY() > frameHeight) {
+            gameOver();
+            return;
+        }
+
         if(view != null) {
             view.repaint();
         }
