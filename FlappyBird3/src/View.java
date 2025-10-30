@@ -7,18 +7,20 @@ public class View extends JPanel {
     int height = 640;
 
     private Logic logic;
-    private JLabel scoreLabel; // ✅ dipindah ke sini
+    private JLabel scoreLabel;
 
+    //constructor
     public View(Logic logic) {
         this.logic = logic;
 
         setPreferredSize(new Dimension(width, height));
         setBackground(Color.cyan);
 
+        //biar panel meneripma input dr keyboard
         setFocusable(true);
         addKeyListener(logic);
 
-        // 🔥 Setup label skor
+        //buat label skor
         scoreLabel = new JLabel("Score: 0");
         scoreLabel.setFont(new Font("Arial", Font.BOLD, 24));
         scoreLabel.setForeground(Color.white);
@@ -29,6 +31,7 @@ public class View extends JPanel {
         requestFocusInWindow();
     }
 
+    //ngegambar ulang smua komponen dilayar
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -36,12 +39,14 @@ public class View extends JPanel {
     }
 
     public void draw(Graphics g) {
+        //gambar player
         Player player = logic.getPlayer();
         if (player != null) {
             g.drawImage(player.getImage(), player.getPosX(), player.getPosY(),
                     player.getWidth(), player.getHeight(), null);
         }
 
+        //gambar smua pipa
         ArrayList<Pipe> pipes = logic.getPipes();
         if (pipes != null) {
             for (int i = 0; i < pipes.size(); i++) {
@@ -51,7 +56,7 @@ public class View extends JPanel {
             }
         }
 
-        // 🔥 Update text skor
+        //update text score
         scoreLabel.setText("Score: " + logic.getScore());
     }
 }

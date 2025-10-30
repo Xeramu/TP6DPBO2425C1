@@ -1,14 +1,17 @@
 import java.awt.*;
 
 public class Player {
+    //posisi, ukuran, sama gambar burung
     private int posX;
     private int posY;
     private int width;
     private int height;
     private Image image;
 
+    //kecepatan jatohnya burung
     private int velocityY;
 
+    //conrtcutor player
     public Player(int posX, int posY, int width, int height, Image image) {
         this.posX = posX;
         this.posY = posY;
@@ -16,12 +19,14 @@ public class Player {
         this.height = height;
         this.image = image;
 
-        this.velocityY = -0;
+        this.velocityY = -0; //biar burungnya engga terbang pas awal
     }
 
+    //get set
     public void setPosX(int posX) {
         this.posX = posX;
     }
+
     public int getPosX() {
         return posX;
     }
@@ -29,6 +34,7 @@ public class Player {
     public void setPosY(int posY) {
         this.posY = posY;
     }
+
     public int getPosY() {
         return posY;
     }
@@ -36,6 +42,7 @@ public class Player {
     public void setWidth(int width) {
         this.width = width;
     }
+
     public int getWidth() {
         return width;
     }
@@ -43,6 +50,7 @@ public class Player {
     public void setHeight(int height) {
         this.height = height;
     }
+
     public int getHeight() {
         return height;
     }
@@ -50,6 +58,7 @@ public class Player {
     public void setImage(Image image) {
         this.image = image;
     }
+
     public Image getImage() {
         return image;
     }
@@ -57,6 +66,7 @@ public class Player {
     public void setVelocityY(int velocityY) {
         this.velocityY = velocityY;
     }
+
     public int getVelocityY() {
         return velocityY;
     }
