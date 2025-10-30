@@ -35,6 +35,8 @@ public class Logic implements ActionListener, KeyListener {
 
     int pipeVelocityX = -2;
 
+    int score = 0;
+
     public Logic() {
         birdImage = new ImageIcon(getClass().getResource("assets/bird.png")).getImage();
         player = new Player(PlayerStartPosX, PlayerStartPosY, playerWidth, playerHeight, birdImage);
@@ -54,6 +56,7 @@ public class Logic implements ActionListener, KeyListener {
 
         gameloop = new Timer(1000 / 60, this);
         gameloop.start();
+        System.out.println("Game loop dimulai...");
     }
 
     public void setView(View view) {
@@ -99,12 +102,19 @@ public class Logic implements ActionListener, KeyListener {
         return playerRect.intersects(pipeRect);
     }
 
+    public int getScore() {
+        return score;
+    }
+
     public void gameOver() {
         System.out.println("GAME OVER");
         gameloop.stop();
         pipesCooldown.stop();
 
-        JOptionPane.showMessageDialog(null, "GAME OVER!\nPress R to restart the game");
+        // 🧩 tampilkan popup di EDT setelah UI update
+        SwingUtilities.invokeLater(() -> {
+            JOptionPane.showMessageDialog(null, "GAME OVER!\nPress R to restart the game");
+        });
     }
 
     public void resetGame() {
@@ -115,8 +125,11 @@ public class Logic implements ActionListener, KeyListener {
         player.setPosY(PlayerStartPosY);
         player.setVelocityY(0);
 
-        // hapus semua pipa
+        for (Pipe p : pipes) {
+            p.passed = false;
+        }
         pipes.clear();
+        score = 0;
 
         // mulai ulang timer
         gameloop.start();
@@ -127,22 +140,31 @@ public class Logic implements ActionListener, KeyListener {
     public void actionPerformed(ActionEvent e) {
         move();
 
-        // 🔥 Cek tabrakan sama pipa
-        for (Pipe pipe : pipes) {
-            if (checkCollision(player, pipe)) {
-                gameOver();
-                return;
-            }
+        // Repaint dulu biar tampilan update tiap frame
+        if (view != null) {
+            view.repaint();
         }
 
-        // 🔥 Cek kalau jatuh ke bawah frame
-        if (player.getPosY() > frameHeight) {
+        // Cek kalau burung jatuh ke bawah layar
+        if (player.getPosY() + player.getHeight() >= frameHeight) {
             gameOver();
             return;
         }
 
-        if (view != null) {
-            view.repaint();
+        // Cek tabrakan dengan setiap pipa
+        for (Pipe pipe : pipes) {
+            if (checkCollision(player, pipe)) {
+                System.out.println("Nabrak bang");
+                gameOver();
+                return;
+            }
+
+            // Tambah skor hanya untuk pipa bawah (supaya nggak double count)
+            if (pipe.getImage() == lowerPipeImage && !pipe.passed && pipe.getPosX() + pipe.getWidth() < player.getPosX()) {
+                pipe.passed = true;
+                score++;
+                System.out.println("Score: " + score);
+            }
         }
     }
 
