@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 public class Logic implements ActionListener, KeyListener {
+
     int frameWidth = 360;
     int frameHeight = 640;
 
@@ -33,7 +34,8 @@ public class Logic implements ActionListener, KeyListener {
     int gravity = 1;
 
     int pipeVelocityX = -2;
-    public Logic () {
+
+    public Logic() {
         birdImage = new ImageIcon(getClass().getResource("assets/bird.png")).getImage();
         player = new Player(PlayerStartPosX, PlayerStartPosY, playerWidth, playerHeight, birdImage);
 
@@ -50,7 +52,7 @@ public class Logic implements ActionListener, KeyListener {
         });
         pipesCooldown.start();
 
-        gameloop = new Timer(1000/60, this);
+        gameloop = new Timer(1000 / 60, this);
         gameloop.start();
     }
 
@@ -66,7 +68,7 @@ public class Logic implements ActionListener, KeyListener {
         return pipes;
     }
 
-    public void placePipes(){
+    public void placePipes() {
         int randomPosY = (int) (pipeStartPosY - pipeHeight / 4 - Math.random() * (pipeHeight / 2));
         int openingSpace = frameHeight / 4;
 
@@ -82,7 +84,7 @@ public class Logic implements ActionListener, KeyListener {
         player.setPosY(player.getPosY() + player.getVelocityY());
         player.setPosY(Math.max(player.getPosY(), 0));
 
-        for (int i = 0; i < pipes.size(); i++){
+        for (int i = 0; i < pipes.size(); i++) {
             Pipe pipe = pipes.get(i);
             pipe.setPosX(pipe.getPosX() + pipeVelocityX);
         }
@@ -102,7 +104,23 @@ public class Logic implements ActionListener, KeyListener {
         gameloop.stop();
         pipesCooldown.stop();
 
-        JOptionPane.showMessageDialog(null, "GAME OVER!");
+        JOptionPane.showMessageDialog(null, "GAME OVER!\nPress R to restart the game");
+    }
+
+    public void resetGame() {
+        System.out.println("Restart Game");
+
+        // reset posisi player
+        player.setPosX(PlayerStartPosX);
+        player.setPosY(PlayerStartPosY);
+        player.setVelocityY(0);
+
+        // hapus semua pipa
+        pipes.clear();
+
+        // mulai ulang timer
+        gameloop.start();
+        pipesCooldown.start();
     }
 
     @Override
@@ -123,19 +141,27 @@ public class Logic implements ActionListener, KeyListener {
             return;
         }
 
-        if(view != null) {
+        if (view != null) {
             view.repaint();
         }
     }
 
     @Override
-    public void keyTyped(KeyEvent e){}
+    public void keyTyped(KeyEvent e) {
+    }
+
     @Override
-    public void keyPressed(KeyEvent e){
-        if(e.getKeyCode() == KeyEvent.VK_SPACE){
-            System.out.println("testest");
+    public void keyPressed(KeyEvent e) {
+        int code = e.getKeyCode();
+
+        if (code == KeyEvent.VK_SPACE) {
             player.setVelocityY(-10);
+        } else if (code == KeyEvent.VK_R) {
+            resetGame();
         }
     }
-    public void keyReleased(KeyEvent e){}
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+    }
 }
