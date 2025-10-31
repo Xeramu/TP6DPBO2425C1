@@ -26,6 +26,32 @@ public class MainMenuFlappyBirdElAngjay {
             TitlePanel.setForeground(Color.white); // ubah warna teks juga kalau mau
         }
 
+        //action listener buat button play
+        playButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //buat nutup window main menu
+                JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(panel1);
+                currentFrame.dispose();
+
+                //jalanin gamnya. diambil dr App.java
+                JFrame frame = new JFrame("Flappy Bird");
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setResizable(false);
+
+                Logic logika = new Logic();
+                View tampilan = new View(logika);
+                logika.setView(tampilan);
+
+                frame.add(tampilan);
+                frame.pack();
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
+
+                tampilan.requestFocusInWindow();
+            }
+        });
+
         //action listener buat button exit
         exitButton.addActionListener(new ActionListener() {
             @Override
