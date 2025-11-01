@@ -15,9 +15,11 @@ A. Design Program
 
    Bentukannya kayak game flappy bird pada umumnya. Ada burung (kita), pipa, sama skor di tengah atas. Rulesnya jg sama. Nyium pipa ntar game over, jatoh kebawah jg game over. Setiap ngelewatin pipa, skornya bertambah sebiji (+ 1).
 
-   
 
-    Pas Game over, ntar muncul window game over kayak gini. Trus ada message pencet R di keyboard buat restart gamenya.
+   <img width="543" height="1006" alt="image" src="https://github.com/user-attachments/assets/9502935e-216b-4399-a266-2c0af87e95cf" />
+
+
+   Pas Game over, ntar muncul message game over kayak gini. Trus ada message pencet R di keyboard buat restart gamenya.
 
 3. Class
 
