@@ -129,20 +129,26 @@ public class Logic implements ActionListener, KeyListener {
     }
 
     //pas game over
+    boolean isGameOver = false;
+
+    //getter
+    public boolean isGameOver() {
+        return isGameOver;
+    }
+
+    //fungsi buat game over
     public void gameOver() {
-        System.out.println("GAME OVER");//buat debug jugaks
+        System.out.println("GAME OVER");
         gameloop.stop();
         pipesCooldown.stop();
-        SwingUtilities.invokeLater(() -> {
-            JOptionPane.showMessageDialog(null, "GAME OVER!\nPress R to restart the game");//pas kalah ntar nampilin message window
-        });
+        isGameOver = true;//nandain game udah selesai
     }
 
     //buat reset smua data biar game bisa direstart
     public void resetGame() {
         System.out.println("Restart Game");
 
-        // reset posisi player
+        //buat ngereset posisi player
         player.setPosX(PlayerStartPosX);
         player.setPosY(PlayerStartPosY);
         player.setVelocityY(0);
@@ -152,6 +158,8 @@ public class Logic implements ActionListener, KeyListener {
         }
         pipes.clear();
         score = 0;
+
+        isGameOver = false;
 
         gameloop.start();
         pipesCooldown.start();
@@ -186,7 +194,7 @@ public class Logic implements ActionListener, KeyListener {
             if (pipe.getImage() == lowerPipeImage && !pipe.passed && pipe.getPosX() + pipe.getWidth() < player.getPosX()) {
                 pipe.passed = true;
                 score++;
-                System.out.println("Score: " + score);
+                System.out.println(score);
             }
         }
     }

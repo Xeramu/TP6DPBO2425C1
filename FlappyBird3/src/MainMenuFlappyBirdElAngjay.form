@@ -15,7 +15,7 @@
         <properties>
           <horizontalAlignment value="0"/>
           <horizontalTextPosition value="0"/>
-          <text value="Welcome to FlappyBird el Angjay"/>
+          <text value=""/>
         </properties>
       </component>
       <component id="9fb88" class="javax.swing.JButton" binding="playButton" default-binding="true">
