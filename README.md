@@ -10,6 +10,7 @@ A. Design Program
 
 2. Game
 
+
   <img width="543" height="1006" alt="image" src="https://github.com/user-attachments/assets/7db476d7-9d1f-4941-8938-e81f6af7d71a" />
 
 
@@ -30,6 +31,4 @@ B. Penjelasan Alur
 C. Dokumentasi
 
 
-
-https://github.com/user-attachments/assets/e8c59d13-d0f7-4dbf-8dd6-dd5a8a16e637
-
+https://github.com/user-attachments/assets/f6cf9a6f-e347-4da3-a6e9-85477fe540e7
