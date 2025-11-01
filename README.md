@@ -2,28 +2,38 @@
 
 A. Design Program
 
+
 1. App.java
+
    Ini class utama buat ngejalanin gamenya. Ngatur window utama sama menghubungkan class logic dan view.
    
 2. Logic.java
+
    Isinya logika buat gamenya kayak gerakan burung, pipa, gravitasi, skor, sama ngecek si burung nabrak pipa apa engga.
    
 3. View.java
+
    View jd UI buat gamenya. Ngegambar background, burung, pipa, skor, sama message game over.
    
 4. Player.java
+
    Ini buat nyimpen data burung kayak posisi ukuran, kecepatan jatohnya burung, sama gambar burung.
    
 5. Pipe.java
-    Buat nyimpen data setiap pipa. Kayak posisi, ukuran, gambar, sama status udh silewatin apa blm.
+
+   Buat nyimpen data setiap pipa. Kayak posisi, ukuran, gambar, sama status udh silewatin apa blm.
    
 6. MainMenuFlappyBirdElAngjay
+
     Buat nampilin menu utama. Isinya tombol [PLAY] sama [EXIT].
+
 
 B. Penjelasan Alur
 
+
    1. Main Menu
-      Saat program dijalanin, tampilan yg pertama kali muncul adalah main meu. Isinya button [PLAY] atau [EXIT]. Klo klik [EXIT] ntar windownya bakal ke close. Klo klik [PLAY], ntar gamenya lgsng mulai.
+
+      Saat program dijalanin, tampilan yg pertama kali muncul adalah main menu. Isinya button [PLAY] atau [EXIT]. Klo klik [EXIT] ntar windownya bakal ke close. Klo klik [PLAY], ntar gamenya lgsng mulai.
       
    2. Game
       - Abis klik play, ntar game lgsng dimulai. Ada background, skor di tengah atas, sama burung (kita).
